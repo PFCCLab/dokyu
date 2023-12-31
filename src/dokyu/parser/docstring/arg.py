@@ -10,12 +10,22 @@ from dokyu.schema.docstring import Argument
 
 
 def to_argument(arg: list[Any]) -> Parser[str, Argument]:
+    is_optional = False
     name, type_, description_ = arg
-    type = type_[0] if type_ else None
+
+    if type_:
+        type = type_[0].strip()
+        assert isinstance(type, str)
+        if type.endswith("optional"):
+            is_optional = True
+            type = type[: type.rfind(",")].strip()
+    else:
+        type = None
+
     description_first_line = description_[0]
     description_rest_lines = description_[1]
     description = " ".join([description_first_line] + description_rest_lines)
-    return success(Argument(name=name, type=type, description=description))
+    return success(Argument(name=name, type=type, is_optional=is_optional, description=description))
 
 
 def to_arguments(args: list[Any]) -> Parser[str, list[Argument]]:
@@ -25,7 +35,7 @@ def to_arguments(args: list[Any]) -> Parser[str, list[Argument]]:
 class ArgsParser(ParserContext, whitespace=None):
     next_line = "\n" & indent
     blank_line = "\n"
-    args_head = lit("Args:")
+    args_head = lit("Args:") | lit("Parameters:")
     arg_type = reg(r"[^)]+")
     arg_doc = optional_whitespace >> reg(r".*") & rep("\n" >> double_indent >> reg(r".*"))
     # TODO(SigureMo): Deal *args and **kwargs

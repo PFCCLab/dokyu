@@ -42,10 +42,11 @@ Args:
     arg_2 (list[int|tuple[int, ...]] | tuple[int, ...]): Arg 2 is a list of integers.
 """,
             [
-                Argument(name="arg_1", type="int", description="Arg 1 is an integer."),
+                Argument(name="arg_1", type="int", is_optional=False, description="Arg 1 is an integer."),
                 Argument(
                     name="arg_2",
                     type="list[int|tuple[int, ...]] | tuple[int, ...]",
+                    is_optional=False,
                     description="Arg 2 is a list of integers.",
                 ),
             ],
@@ -57,7 +58,7 @@ Args:
     arg_1 (int): Arg 1 is an integer.
 """,
             [
-                Argument(name="arg_1", type="int", description="Arg 1 is an integer."),
+                Argument(name="arg_1", type="int", is_optional=False, description="Arg 1 is an integer."),
             ],
         ),
         (
@@ -71,6 +72,7 @@ Args:
                 Argument(
                     name="arg_1",
                     type="np.ndarray[int] | int",
+                    is_optional=False,
                     description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
                 ),
             ],
@@ -89,13 +91,24 @@ Args:
                 Argument(
                     name="arg_1",
                     type="np.ndarray[int] | int",
+                    is_optional=False,
                     description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
                 ),
                 Argument(
                     name="arg_2",
                     type="np.ndarray[int] | int",
+                    is_optional=False,
                     description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
                 ),
+            ],
+        ),
+        (
+            """\
+Parameters:
+    arg_1 (int, optional): Arg 1 is an integer.
+""",
+            [
+                Argument(name="arg_1", type="int", is_optional=True, description="Arg 1 is an integer."),
             ],
         ),
     ],
