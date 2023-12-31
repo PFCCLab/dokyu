@@ -8,3 +8,8 @@ class Argument(BaseModel):
     type: Optional[str]
     is_optional: bool
     description: str
+
+
+class Return(BaseModel):
+    type: Optional[str]
+    description: str

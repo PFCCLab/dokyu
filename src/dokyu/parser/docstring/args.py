@@ -24,7 +24,7 @@ def to_argument(arg: list[Any]) -> Parser[str, Argument]:
 
     description_first_line = description_[0]
     description_rest_lines = description_[1]
-    description = " ".join([description_first_line] + description_rest_lines)
+    description = "\n".join([description_first_line] + description_rest_lines)
     return success(Argument(name=name, type=type, is_optional=is_optional, description=description))
 
 
@@ -33,8 +33,8 @@ def to_arguments(args: list[Any]) -> Parser[str, list[Argument]]:
 
 
 class ArgsParser(ParserContext, whitespace=None):
-    next_line = "\n" & indent
-    blank_line = "\n"
+    next_line = lit("\n") & indent
+    blank_line = lit("\n")
     args_head = lit("Args:") | lit("Parameters:")
     arg_type = reg(r"[^)]+")
     arg_doc = optional_whitespace >> reg(r".*") & rep("\n" >> double_indent >> reg(r".*"))

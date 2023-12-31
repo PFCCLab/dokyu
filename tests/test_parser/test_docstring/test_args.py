@@ -3,7 +3,7 @@
 import pytest
 from parsita import Success
 
-from dokyu.parser.docstring.arg import ArgsParser
+from dokyu.parser.docstring.args import ArgsParser
 from dokyu.schema.docstring import Argument
 
 
@@ -73,7 +73,7 @@ Args:
                     name="arg_1",
                     type="np.ndarray[int] | int",
                     is_optional=False,
-                    description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
+                    description="Arg 1 is an integer. This line is too long and will be wrapped\nwith next line.\nand next line.",
                 ),
             ],
         ),
@@ -92,13 +92,13 @@ Args:
                     name="arg_1",
                     type="np.ndarray[int] | int",
                     is_optional=False,
-                    description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
+                    description="Arg 1 is an integer. This line is too long and will be wrapped\nwith next line.\nand next line.",
                 ),
                 Argument(
                     name="arg_2",
                     type="np.ndarray[int] | int",
                     is_optional=False,
-                    description="Arg 1 is an integer. This line is too long and will be wrapped with next line. and next line.",
+                    description="Arg 1 is an integer. This line is too long and will be wrapped\nwith next line.\nand next line.",
                 ),
             ],
         ),
@@ -114,7 +114,6 @@ Parameters:
     ],
 )
 def test_parse_args(args_string: str, expected: list[Argument]):
-    args_string = args_string
     res = ArgsParser.args.parse(args_string)
     assert isinstance(res, Success)
     assert res.unwrap() == expected
