@@ -29,7 +29,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = ["parsita"]
+dependencies = ["parsita", "pydantic"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
