@@ -1,11 +1,10 @@
 # pyright: basic
-# pyright: reportUndefinedVariable=false
 
 from typing import Any
 
 from parsita import Parser, ParserContext, lit, opt, reg, rep, success
 
-from dokyu.parser.docstring.utils import double_indent, identifiers, indent, optional_whitespace
+from dokyu.parser.docstring.utils import double_indent, indent, optional_whitespace
 from dokyu.schema.docstring import Return
 
 

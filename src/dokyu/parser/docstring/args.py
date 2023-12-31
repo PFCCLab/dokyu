@@ -1,5 +1,5 @@
 # pyright: basic
-# pyright: reportUndefinedVariable=false
+
 
 from typing import Any
 
